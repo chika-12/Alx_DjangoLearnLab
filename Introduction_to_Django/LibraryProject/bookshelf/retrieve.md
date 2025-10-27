@@ -2,5 +2,5 @@
 Book.objects.all()
 
 ## To retrive by id 
-b1 = Book.objects.get(id=1)
+b1 = Book.objects.get(publication_year=1984)
 print(b1)
