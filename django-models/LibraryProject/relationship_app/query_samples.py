@@ -9,7 +9,7 @@ def all_books():
   return books
 
 def retrive_librarian(library):
-  librarian = Librarian.objects.filter(library=library)
+  librarian = Librarian.objects.get(library=library)
   return librarian
 
 def list_all_books_in_library(library_name):
