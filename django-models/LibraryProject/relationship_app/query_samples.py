@@ -5,10 +5,16 @@ def filter_by_author(author):
   return books_by_author
 
 def all_books():
-  books = Book.objects.get()
+  books = Book.objects.all()
   return books
 
 def retrive_librarian(library):
   librarian = Librarian.objects.filter(library=library)
   return librarian
+
+def list_all_books_in_library(library_name):
+  books = Library.objects.get(name=library_name)
+  return books
+
+
   
