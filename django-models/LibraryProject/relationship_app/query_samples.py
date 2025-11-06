@@ -14,7 +14,7 @@ def retrive_librarian(library):
 
 def list_all_books_in_library(library_name):
   books = Library.objects.get(name=library_name)
-  return books
+  return books.all()
 
 
   
