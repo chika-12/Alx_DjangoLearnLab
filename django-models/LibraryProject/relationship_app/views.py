@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from .models import Author, Librarian, Library, Book
+from .models import Author, Librarian, Book
+from .models import Library
 from django.http import JsonResponse
 from django.views.generic import DeleteView
 
