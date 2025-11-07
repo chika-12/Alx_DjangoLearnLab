@@ -9,7 +9,7 @@ from django.views.generic.detail import DetailView
 code = "relationship_app/list_books.html"
 code = "relationship_app/library_detail.html"
 
-def list_all_books(request):
+def list_books(request):
   if request.method == "GET":
     books = Book.objects.all()
     context = {"books": books}
