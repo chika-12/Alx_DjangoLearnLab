@@ -5,6 +5,7 @@ from .models import Author, Librarian, Library, Book
 from django.http import JsonResponse
 from django.views.generic import DeleteView
 
+code = "relationship_app/list_books.html"
 
 def list_all_books(request):
   if request.method == "GET":
