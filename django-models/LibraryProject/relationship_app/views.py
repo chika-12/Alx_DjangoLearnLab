@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from .models import Author, Librarian, Book
 from .models import Library
 from django.http import JsonResponse
-from django.views.generic import DeleteView
+from django.views.generic.detail import DetailView
 
 code = "relationship_app/list_books.html"
 code = "relationship_app/library_detail.html"
@@ -26,7 +26,7 @@ def add_books(request):
     return redirect('list_books')
   return render(request, "add_book.html")
 
-class LibraryDetailView(DeleteView):
+class LibraryDetailView(DetailView):
   model = Library
   template_name = 'library_detail.html'
   context_object_name = 'library'
