@@ -5,8 +5,10 @@ from .models import Author, Librarian, Book
 from .models import Library
 from django.http import JsonResponse
 from django.views.generic.detail import DetailView
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.urls import reverse_lazy
 
 code = "relationship_app/list_books.html"
 code = "relationship_app/library_detail.html"
@@ -49,18 +51,11 @@ def register_view(request):
     form = UserCreationForm()
   return render(request, "register.html", {'form': form})
 
-def login_view(request):
-  if request.method == 'POST':
-    form = AuthenticationForm(data=request.POST)
-    if form.is_valid():
-      user = form.get_user()
-      login(request, user)
-      return redirect('list_books')
-  else:
-    form = AuthenticationForm()
-  return render(request, 'login.html', {'form': form})
+# class CustomLoginView(LoginView):
+#   template_name = 'login.html'
+#   redirect_authenticated_user = True
+#   success_url = reverse_lazy('list_books')
 
-def logout_view(request):
-  logout(request)
-  return render(request, 'logout.html')
+# class CustomLogoutView(LogoutView):
 
+#   template_name = 'logout.html'
