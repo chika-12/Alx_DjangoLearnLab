@@ -9,9 +9,9 @@ urlpatterns = [
   path("books/add/", views.add_books, name="add_books"),
   path('library/<int:pk>/', views.LibraryDetailView.as_view(), name='library_detail'),
   path("users/", views.show_user, name="users"),
-  path("admin/", views.admin_dashboard, name="admin"),
-  path("librarian", views.librarian_dashboard, name='librarian'),
-  path("member", views.member_dashboard, name="member"),
+  path("admin/", views.admin_dashboard, name="admin_dashboard"),
+  path("librarian", views.librarian_dashboard, name='librarian_dashboard'),
+  path("member", views.member_dashboard, name="member_dashboard"),
 
   #Authentication
   path('register/', views.register, name="register"),

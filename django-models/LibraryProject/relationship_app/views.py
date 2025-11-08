@@ -57,9 +57,6 @@ def register(request):
   return render(request, "register.html", {'form': form})
 
 
-
-
-
 def is_admin(user):
   return user.is_authenticated and hasattr(user, 'userprofile') and user.userprofile.role == 'admin'
 
@@ -70,30 +67,21 @@ def is_member(user):
   return user.is_authenticated and hasattr(user, 'userprofile') and user.userprofile.role == 'member'
 
 
-
-
-
 def show_user(request):
   user = User.objects.all()
   return render(request, "users.html", {"users": user})
 
 @user_passes_test(is_admin, login_url='/login/')
 def admin_dashboard(request):
-  template = loader.get_template('admin_view.html')
-  return HttpResponse(template.render({}, request))
+  return render(request, 'admin_view.html')
 
 @user_passes_test(is_librarian, login_url='/login/')
 def librarian_dashboard(request):
-  template = loader.get_template('librarian_view.html')
-  return HttpResponse(template.render({}, request))
+  return render(request, "librarian_view.html")
 
 @user_passes_test(is_member, login_url='/login/')
 def member_dashboard(request):
-  template = loader.get_template('member_view.html')
-  return HttpResponse(template.render({}, request))
-
-
-
+  return render(request, "member_view.html")
 
 
 
