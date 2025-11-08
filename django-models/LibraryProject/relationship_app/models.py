@@ -29,4 +29,4 @@ class UserProfile(models.Model):
     ('member', "Member")
   ]
   user = models.OneToOneField(User, on_delete=models.CASCADE)
-  role = models.CharField(choices=ROLE_CHOICE, default='member')
+  role = models.CharField(choices=ROLE_CHOICE, default='admin')

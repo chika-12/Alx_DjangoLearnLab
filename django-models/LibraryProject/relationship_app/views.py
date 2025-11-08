@@ -10,7 +10,8 @@ from django.template import loader
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
-
+from .utils import is_admin, is_librarian, is_member
+from django.contrib.auth.decorators import user_passes_test
 code = "relationship_app/list_books.html"
 code = "relationship_app/library_detail.html"
 
@@ -58,6 +59,27 @@ def register(request):
 def show_user(request):
   user = User.objects.all()
   return render(request, "users.html", {"users": user})
+
+@user_passes_test(is_admin, login_url='/login/')
+def admin_dashboard(request):
+  template = loader.get_template('admin_view.html')
+  return HttpResponse(template.render({}, request))
+
+@user_passes_test(is_librarian, login_url='/login/')
+def librarian_dashboard(request):
+  template = loader.get_template('librarian_view.html')
+  return HttpResponse(template.render({}, request))
+
+@user_passes_test(is_member, login_url='/login/')
+def member_dashboard(request):
+  template = loader.get_template('member_view.html')
+  return HttpResponse(template.render({}, request))
+
+
+
+
+
+
 # class CustomLoginView(LoginView):
 #   template_name = 'login.html'
 #   redirect_authenticated_user = True
