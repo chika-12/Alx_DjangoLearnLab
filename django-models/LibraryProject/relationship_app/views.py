@@ -10,7 +10,7 @@ from django.template import loader
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
-from .utils import is_admin, is_librarian, is_member
+#from .utils import is_admin, is_librarian, is_member
 from django.contrib.auth.decorators import user_passes_test
 code = "relationship_app/list_books.html"
 code = "relationship_app/library_detail.html"
@@ -55,6 +55,23 @@ def register(request):
   else:
     form = UserCreationForm()
   return render(request, "register.html", {'form': form})
+
+
+
+
+
+def is_admin(user):
+  return user.is_authenticated and hasattr(user, 'userprofile') and user.userprofile.role == 'admin'
+
+def is_librarian(user):
+  return user.is_authenticated and hasattr(user, 'userprofile') and user.userprofile.role == 'librarian'
+
+def is_member(user):
+  return user.is_authenticated and hasattr(user, 'userprofile') and user.userprofile.role == 'member'
+
+
+
+
 
 def show_user(request):
   user = User.objects.all()
