@@ -85,6 +85,19 @@ def member_dashboard(request):
 
 
 
+from django.contrib.auth.mixins import UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views import View
+
+class AdminView(LoginRequiredMixin, UserPassesTestMixin, View):
+  template_name = "admin_view.html"
+  login_url = "/login/"
+
+  def test_func(self):
+    return hasattr(self.request.user, 'userprofile') and self.request.user.userprofile.role == 'admin'
+  def get(self, request, *args, **kwargs):
+    return render(request, self.template_name)
+
 # class CustomLoginView(LoginView):
 #   template_name = 'login.html'
 #   redirect_authenticated_user = True
