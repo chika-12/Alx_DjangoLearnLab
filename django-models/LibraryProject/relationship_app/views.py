@@ -3,12 +3,13 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from .models import Author, Librarian, Book
 from .models import Library
-from django.http import JsonResponse
+from django.http import HttpResponse
 from django.views.generic.detail import DetailView
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.views import LoginView, LogoutView
+from django.template import loader
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.urls import reverse_lazy
+from django.contrib.auth.models import User
 
 code = "relationship_app/list_books.html"
 code = "relationship_app/library_detail.html"
@@ -17,7 +18,9 @@ def list_books(request):
   if request.method == "GET":
     books = Book.objects.all()
     context = {"books": books}
-    return render(request, "list_book.html", context)
+    template = loader.get_template('list_book.html')
+    return HttpResponse(template.render(context, request))
+    
 
 def add_books(request):
   if request.method == "POST":
@@ -28,7 +31,8 @@ def add_books(request):
 
     Book.objects.create(title=title, author=author)
     return redirect('list_books')
-  return render(request, "add_book.html")
+  template = loader.get_template("add_book.html")
+  return HttpResponse(template.render({}, request))
 
 class LibraryDetailView(DetailView):
   model = Library
@@ -51,6 +55,9 @@ def register(request):
     form = UserCreationForm()
   return render(request, "register.html", {'form': form})
 
+def show_user(request):
+  user = User.objects.all()
+  return render(request, "users.html", {"users": user})
 # class CustomLoginView(LoginView):
 #   template_name = 'login.html'
 #   redirect_authenticated_user = True

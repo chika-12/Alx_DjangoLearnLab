@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 import uuid
 
 # Create your models here.
@@ -19,3 +20,13 @@ class Library(models.Model):
 class Librarian(models.Model):
   name = models.CharField(max_length=200)
   library = models.OneToOneField('Library', on_delete=models.CASCADE)
+
+class UserProfile(models.Model):
+
+  ROLE_CHOICE = [
+    ("admin", "Admin"),
+    ("librarians", "Librarians"),
+    ('member', "Member")
+  ]
+  user = models.OneToOneField(User, on_delete=models.CASCADE)
+  role = models.CharField(choices=ROLE_CHOICE, default='member')

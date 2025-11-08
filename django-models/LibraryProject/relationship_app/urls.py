@@ -7,6 +7,7 @@ urlpatterns = [
   path("books/", views.list_books, name='list_books'),
   path("books/add/", views.add_books, name="add_books"),
   path('library/<int:pk>/', views.LibraryDetailView.as_view(), name='library_detail'),
+  path("users/", views.show_user, name="users"),
 
   #Authentication
   path('register/', views.register, name="register"),
