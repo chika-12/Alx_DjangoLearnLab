@@ -34,6 +34,14 @@ class CustomUser(AbstractUser):
   REQUIRED_FIELDS = ['username', 'first_name', 'last_name']  # username is still required when creating superusers
 
   
+  class Meta:
+    permissions = [
+      ("can_view", "Can view"),
+      ("can_create", "Can create"),
+      ("can_edit", "Can edit"),
+      ("can_delete", "Can delete")
+    ]
+
   objects = CustomUserManager()
   def __str__(self):
     return f"{self.first_name} {self.last_name}"
