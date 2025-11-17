@@ -25,15 +25,13 @@ class CustomUserManager(BaseUserManager):
     return self.create_user(username=username, email=email, password=password, **extra_fields)
 
 
-
-
 class CustomUser(AbstractUser):
   email = models.EmailField(unique=True)
   date_of_birth = models.DateTimeField(null=True, blank=True)
   profile_photo = models.ImageField(upload_to='profile_photos/', null=True, blank=True)
 
   USERNAME_FIELD = 'email'  # use email to login
-  REQUIRED_FIELDS = ['username']  # username is still required when creating superusers
+  REQUIRED_FIELDS = ['username', 'first_name', 'last_name']  # username is still required when creating superusers
 
   
   objects = CustomUserManager()
@@ -45,6 +43,18 @@ class Book(models.Model):
   author = models.CharField(max_length=100)
   publication_year = models.IntegerField()
   
+
+  #can_view, can_create, can_edit, and can_delete 
+
+  class Meta:
+    permissions = [
+      ("can_view", "Can view"),
+      ("can_create", "Can create"),
+      ("can_edit", "Can edit"),
+      ("can_delete", "Can delete")
+    ]
+
   def __str__(self):
     return f"{self.title} was written by {self.author} in {self.publication_year}"
+  
 
