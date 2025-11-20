@@ -10,7 +10,7 @@ urlpatterns = [
   path('library/<int:pk>/', views.LibraryDetailView.as_view(), name='library_detail'),
   path("users/", views.show_user, name="users"),
   path("admin/", views.admin_dashboard, name="admin_dashboard"),
-  path("librarian", views.librarian_dashboard, name='librarian_dashboard'),
+  path("librarian/", views.librarian_dashboard, name='librarian_dashboard'),
   path("member/", views.member_dashboard, name="member_dashboard"),
 
   #Authentication

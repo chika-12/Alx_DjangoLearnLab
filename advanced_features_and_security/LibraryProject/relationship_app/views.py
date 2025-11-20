@@ -9,10 +9,13 @@ from django.contrib.auth import login, authenticate
 from django.template import loader
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.urls import reverse_lazy
-from django.contrib.auth.models import User
 from .utils import is_admin, is_librarian, is_member
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth import get_user_model
+User = get_user_model()
+# now use User.objects...
+
 code = "relationship_app/list_books.html"
 code = "relationship_app/library_detail.html"
 
